@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+	</head>
+	<body>
+		<h1>Leagues</h1>
+		<ul>
+			{% for league in leagues %}
+				<li><a href="{% url 'show' league.id %}">{{league.name}} {{league.sport}}</a></li>
+			{% endfor %}
+		</ul>
+		<h3>New League</h3>
+		<form action="{% url 'create_league' %}" method="post">
+			{% csrf_token %}
+			<p>Name: <input type="text" name="name"></p>
+			<p>Sport: <input type="text" name="sport"></p>
+			<p><input type="submit" value="Create League"></p>
+		</form>
+		<hr>
+		<h1>Teams</h1>
+		<ul>
+			{% for team in teams %}
+				<li>{{team.city}} {{team.name}} ({{team.league.updated_at}})</li>
+			{% endfor %}
+		</ul>
+		<h3>New Team</h3>
+		<form action="/create_team" method="post">
+			{% csrf_token %}
+			<p>City: <input type="text" name="city"></p>
+			<p>Name: <input type="text" name="name"></p>
+			<p>League: 
+				<select name="league_id">
+					{% for league in leagues %}
+						<option value="{{league.id}}">{{league.name}}</option>
+					{% endfor %}
+				</select>
+			</p>
+			<p><input type="submit" value="Create Team"></p>
+		</form>
+	</body>
+</html>

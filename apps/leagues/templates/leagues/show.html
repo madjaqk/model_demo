@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+	</head>
+	<body>
+		<h1>{{league.name}}</h1>
+		<h3>Teams</h3>
+		<ul>
+			{% for team in league.teams.all %}
+				<li>{{team.city}} {{team.name}} ({{team.league.updated_at}})</li>
+			{% endfor %}
+		</ul>
+	</body>
+</html>
