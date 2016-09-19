@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from .models import League, Team
 
 # Create your views here.
@@ -19,7 +20,14 @@ def show(request, id):
 
 def create_league(request):
 	if request.method=="POST":
-		League.objects.create(name=request.POST["name"], sport=request.POST["sport"])
+		res = League.objects.create_league(request.POST)
+
+		if res["created"]:
+			messages.success(request, "{} successfully created".format(res["new_league"].name))
+			# messages.success(request, res["new_league"].name + " successfully created")
+		else:
+			for error in res["errors"]:
+				messages.error(request, error)
 
 	return redirect("/")
 
