@@ -20,7 +20,7 @@ def show(request, id):
 
 def create_league(request):
 	if request.method=="POST":
-		res = League.objects.create_league(request.POST)
+		res = League.objects.new_league(request.POST)
 
 		if res["created"]:
 			messages.success(request, "{} successfully created".format(res["new_league"].name))
