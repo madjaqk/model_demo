@@ -12,12 +12,13 @@
 			</ul>
 		{% endif %}
 		<h1>Leagues</h1>
+		<h1>I changed something!</h1>
 		<ul>
 			{% for league in leagues %}
 				<li><a href="{% url 'show' league.id %}">{{league.name}} {{league.sport}}</a></li>
 			{% endfor %}
 		</ul>
-		<h3>New League</h3>
+		<h3>New Sports League</h3>
 		<form action="{% url 'create_league' %}" method="post">
 			{% csrf_token %}
 			<p>Name: <input type="text" name="name"></p>
@@ -26,11 +27,6 @@
 		</form>
 		<hr>
 		<h1>Teams</h1>
-		<ul>
-			{% for team in teams %}
-				<li>{{team.city}} {{team.name}} ({{team.league.updated_at}})</li>
-			{% endfor %}
-		</ul>
 		<h3>New Team</h3>
 		<form action="/create_team" method="post">
 			{% csrf_token %}
@@ -45,5 +41,10 @@
 			</p>
 			<p><input type="submit" value="Create Team"></p>
 		</form>
+		<ul>
+			{% for team in teams %}
+				<li>{{team.city}} {{team.name}} ({{team.league.updated_at}})</li>
+			{% endfor %}
+		</ul>
 	</body>
 </html>
